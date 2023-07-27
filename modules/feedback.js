@@ -131,6 +131,7 @@ const showQuestionaire = (isLeaving) => {
   // construct URL to your questionaire (with roomId in query string)
   // const questionaireUrl = `http://localhost:8088/embedded_questionaire.html?roomId=${roomId}`;
   const questionaireUrl = `https://tms.turito.com/login`;
+  console.log(questionaireUrl);
 
   const modalEl = document.createElement("div");
   modalEl.innerHTML = `
