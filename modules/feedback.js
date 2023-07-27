@@ -92,27 +92,29 @@ const stopCheckTimer = () => {
 // check if questionaire should be shown (5 mintues before the end of class)
 // called in startCheckTimer interval
 const checkShowQuestionaire = () => {
+  showQuestionaire();
+  clearInterval(checkTimer);
   // prompt only once
-  if (questionairePromptedInClass) {
-    return;
-  }
+  // if (questionairePromptedInClass) {
+  //   return;
+  // }
 
-  if (questionaireStatus === "submitted") {
-    return;
-  }
+  // if (questionaireStatus === "submitted") {
+  //   return;
+  // }
 
   const classEndTime = TCIC.SDK.instance.getClassInfo().endTime * 1000;
   const now = TCIC.SDK.instance.getServerTimestamp();
 
   // less than 5 minutes to the end of class
-  if (true) {
-    showQuestionaire();
+  // if (true) {
+  //   showQuestionaire();
 
-    // mark questionaire as prompted
-    saveQuestionaireStatus({
-      promptedInClass: true,
-    });
-  }
+  //   // mark questionaire as prompted
+  //   saveQuestionaireStatus({
+  //     promptedInClass: true,
+  //   });
+  // }
 };
 
 // actual method to show questionaire
