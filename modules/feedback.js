@@ -1,3 +1,4 @@
+console.log("JS loaded");
 let checkTimer = null;
 let questionaireStatus = null; // null | 'submitted'
 let questionairePromptedInClass = false;
