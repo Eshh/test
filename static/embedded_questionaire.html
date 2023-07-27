@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questionaire</title>
+  <script>
+    // notify result to feedback.js module
+    function postFeedbackResult(result) {
+      window.parent.postMessage({
+        type: 'feedback-result',
+        data: {
+          result,
+        },
+      }, '*');
+    }
+
+    function handleSubmit() {
+      postFeedbackResult('submit');
+    }
+
+    function handleCancel() {
+      postFeedbackResult('cancel');
+    }
+
+    // get & display roomId from querystring
+    window.addEventListener('load', () => {
+      const roomIdEl = document.getElementById('room-id');
+      const searchParams = new URLSearchParams(location.search);
+      roomIdEl.innerText = searchParams.get('roomId');
+    });
+  </script>
+</head>
+
+<body>
+  <p>Questionaire for class: <span id="room-id">roomId will display here</span></p>
+  <p><button type="button" onclick="handleSubmit()">Submit</button></p>
+  <p><button type="button" onclick="handleCancel()">Cancel</button></p>
+</body>
+
+</html>
