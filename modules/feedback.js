@@ -105,7 +105,7 @@ const checkShowQuestionaire = () => {
   const now = TCIC.SDK.instance.getServerTimestamp();
 
   // less than 5 minutes to the end of class
-  if (now >= classEndTime - 5 * 60 * 1000) {
+  if (true) {
     showQuestionaire();
 
     // mark questionaire as prompted
