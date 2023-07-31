@@ -135,7 +135,7 @@ const showQuestionaire = (isLeaving) => {
 
   // construct URL to your questionaire (with roomId in query string)
   // const questionaireUrl = `http://localhost:8088/embedded_questionaire.html?roomId=${roomId}`;
-  const questionaireUrl = `https://tms.turito.com`;
+  const questionaireUrl = `http://localhost:4200/dashboard`;
   console.log(questionaireUrl)
 
   const modalEl = document.createElement('div');
@@ -190,17 +190,18 @@ const handleQuestionaireCancel = () => {
 
 // process message from iframe
 window.addEventListener('message', (e) => {
-  const msg = e.data;
-  if (msg && msg.type === 'feedback-result') {
-    switch (msg.data.result) {
-      case 'submit':
-        handleQuestionaireSubmit();
-        break;
-      case 'cancel':
-        handleQuestionaireCancel();
-        break;
-    }
-  }
+  const msg = e;
+  console.log(msg)
+  // if (msg && msg.type === 'feedback-result') {
+  //   switch (msg.data.result) {
+  //     case 'submit':
+  //       handleQuestionaireSubmit();
+  //       break;
+  //     case 'cancel':
+  //       handleQuestionaireCancel();
+  //       break;
+  //   }
+  // }
 });
 
 // for debug usage only
