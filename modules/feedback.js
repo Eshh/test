@@ -137,11 +137,11 @@ const showQuestionaire = (isLeaving) => {
   // const questionaireUrl = `http://localhost:8088/embedded_questionaire.html?roomId=${roomId}`;
   const questionaireUrl = `http://localhost:4200/dashboard`;
   console.log(questionaireUrl)
-
+  const randomUniqueIdentifier = Math.floor(Math.random() * 100);
   const modalEl = document.createElement('div');
   modalEl.innerHTML = `
   <div class="questionaire-modal__content">
-    <iframe class="questionaire-modal__iframe" src="${questionaireUrl}"></iframe>
+    <iframe class="questionaire-modal__iframe" name="${randomUniqueIdentifier}" src="${questionaireUrl}"></iframe>
   </div>
 `;
   modalEl.className = 'questionaire-modal';
@@ -192,6 +192,7 @@ const handleQuestionaireCancel = () => {
 window.addEventListener('message', (e) => {
   const msg = e;
   console.log(msg)
+  // if(e.origin.includes('tms'))
   // if (msg && msg.type === 'feedback-result') {
   //   switch (msg.data.result) {
   //     case 'submit':
