@@ -210,7 +210,7 @@ window.addEventListener("message", (e) => {
   const msg = e;
   console.log(msg);
   hideQuestionaire();
-  setTimeout(() => tcicEndAndLeaveClass(), 100);
+  setTimeout(() => showEndClassMsgBox(), 100);
   // if(e.origin.includes('tms'))
   // if (msg && msg.type === 'feedback-result') {
   //   switch (msg.data.result) {
