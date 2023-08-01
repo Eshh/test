@@ -192,6 +192,7 @@ const handleQuestionaireCancel = () => {
 window.addEventListener('message', (e) => {
   const msg = e;
   console.log(msg)
+  hideQuestionaire()
   // if(e.origin.includes('tms'))
   // if (msg && msg.type === 'feedback-result') {
   //   switch (msg.data.result) {
