@@ -1,13 +1,17 @@
-console.log('JS loaded')
+console.log("JS loaded");
 let checkTimer = null;
 let questionaireStatus = null; // null | 'submitted'
 let questionairePromptedInClass = false;
 
-const questionaireTaskId = 'custom-task-questionaire';
+const questionaireTaskId = "custom-task-questionaire";
 
 const saveQuestionaireStatus = (params) => {
-  questionaireStatus = params.status !== undefined ? params.status : questionaireStatus;
-  questionairePromptedInClass = params.promptedInClass !== undefined ? params.promptedInClass : questionairePromptedInClass;
+  questionaireStatus =
+    params.status !== undefined ? params.status : questionaireStatus;
+  questionairePromptedInClass =
+    params.promptedInClass !== undefined
+      ? params.promptedInClass
+      : questionairePromptedInClass;
 
   const content = JSON.stringify({
     status: questionaireStatus,
@@ -15,32 +19,39 @@ const saveQuestionaireStatus = (params) => {
     timestamp: TCIC.SDK.instance.getServerTimestamp(),
   });
 
-  console.log('[feedback] updateTask', questionaireTaskId, content);
+  console.log("[feedback] updateTask", questionaireTaskId, content);
 
   TCIC.SDK.instance.updateTask(
     questionaireTaskId, // taskId
     content, // content
     -1, // duration
     false, // createOnly
-    '', // bindingUser
-    true, // needCallback
+    "", // bindingUser
+    true // needCallback
   );
 };
 
-const loadQuestionaireStatus = () => TCIC.SDK.instance.getTasks(0, true)
-  .then((result) => {
-    const questionaireTask = result.tasks.find(task => task.taskId === questionaireTaskId);
-    if (questionaireTask) {
-      const content = JSON.parse(questionaireTask.content);
-      questionaireStatus = content.status;
-      questionairePromptedInClass = content.promptedInClass;
-      console.log('[feedback] questionaireStatus', questionaireStatus);
-      console.log('[feedback] questionairePromptedInClass', questionairePromptedInClass);
-    }
-  })
-  .catch((err) => {
-    console.error('[feedback] loadQuestionaireStatus fail', err);
-  });
+const loadQuestionaireStatus = () =>
+  TCIC.SDK.instance
+    .getTasks(0, true)
+    .then((result) => {
+      const questionaireTask = result.tasks.find(
+        (task) => task.taskId === questionaireTaskId
+      );
+      if (questionaireTask) {
+        const content = JSON.parse(questionaireTask.content);
+        questionaireStatus = content.status;
+        questionairePromptedInClass = content.promptedInClass;
+        console.log("[feedback] questionaireStatus", questionaireStatus);
+        console.log(
+          "[feedback] questionairePromptedInClass",
+          questionairePromptedInClass
+        );
+      }
+    })
+    .catch((err) => {
+      console.error("[feedback] loadQuestionaireStatus fail", err);
+    });
 
 // check if questionaire should be shown (5 mintues before the end of class)
 const checkShowQuestionaire = () => {
@@ -49,7 +60,7 @@ const checkShowQuestionaire = () => {
     return;
   }
 
-  if (questionaireStatus === 'submitted') {
+  if (questionaireStatus === "submitted") {
     return;
   }
 
@@ -59,7 +70,7 @@ const checkShowQuestionaire = () => {
   // less than 5 minutes to the end of class
   showQuestionaire();
   if (now < classEndTime) {
-    console.log('if')
+    console.log("if");
 
     // mark questionaire as prompted
     saveQuestionaireStatus({
@@ -83,48 +94,54 @@ const stopCheckTimer = () => {
 
 // called after teacher joined class
 const onTeacherJoinedClass = () => {
-  loadQuestionaireStatus()
-    .then(() => {
-      TCIC.SDK.instance.subscribeState(TCIC.TMainState.Class_Status, (classStatus) => {
+  loadQuestionaireStatus().then(() => {
+    TCIC.SDK.instance.subscribeState(
+      TCIC.TMainState.Class_Status,
+      (classStatus) => {
         // only check if class not ended
         if (classStatus === TCIC.TClassStatus.Already_Start) {
           startCheckTimer();
         } else {
           stopCheckTimer();
         }
-      });
+      }
+    );
 
-      // show questionaire if "End Class" button has been clicked
-      const endClassButton = document.querySelector('.header__button--start');
-      endClassButton.addEventListener('click', (event) => {
-        console.log('[feedback] End Class button has been clicked');
+    // show questionaire if "End Class" button has been clicked
+    const endClassButton = document.querySelector(".header__button--start");
+    endClassButton.addEventListener(
+      "click",
+      (event) => {
+        console.log("[feedback] End Class button has been clicked");
 
         if (
-          TCIC.SDK.instance.getState(TCIC.TMainState.Class_Status) === TCIC.TClassStatus.Already_Start
-          && questionaireStatus !== 'submitted'
+          TCIC.SDK.instance.getState(TCIC.TMainState.Class_Status) ===
+            TCIC.TClassStatus.Already_Start &&
+          questionaireStatus !== "submitted"
         ) {
           event.stopPropagation();
           showQuestionaire(true);
         }
-      }, {
+      },
+      {
         capture: true,
-      });
-    });
+      }
+    );
+  });
 };
 
 // wait until joined class
-TCIC.SDK.instance.promiseState(TCIC.TMainState.Joined_Class, true)
-  .then(() => {
-    // check if current user is teacher
-    if (TCIC.SDK.instance.isTeacher()) {
-      onTeacherJoinedClass();
-    }
-  });
+TCIC.SDK.instance.promiseState(TCIC.TMainState.Joined_Class, true).then(() => {
+  // check if current user is teacher
+  if (TCIC.SDK.instance.isTeacher()) {
+    onTeacherJoinedClass();
+  }
+});
 
 let isLeavingClass = false;
 
 const showQuestionaire = (isLeaving) => {
-  console.log('[feedback] Showing questionaire');
+  console.log("[feedback] Showing questionaire");
 
   isLeavingClass = isLeaving;
 
@@ -136,23 +153,23 @@ const showQuestionaire = (isLeaving) => {
   // construct URL to your questionaire (with roomId in query string)
   // const questionaireUrl = `http://localhost:8088/embedded_questionaire.html?roomId=${roomId}`;
   const questionaireUrl = `http://localhost:4200/dashboard`;
-  console.log(questionaireUrl)
+  console.log(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
-  const modalEl = document.createElement('div');
+  const modalEl = document.createElement("div");
   modalEl.innerHTML = `
   <div class="questionaire-modal__content">
     <iframe class="questionaire-modal__iframe" name="${randomUniqueIdentifier}" src="${questionaireUrl}"></iframe>
   </div>
 `;
-  modalEl.className = 'questionaire-modal';
-  modalEl.id = 'questionaire-modal';
+  modalEl.className = "questionaire-modal";
+  modalEl.id = "questionaire-modal";
   document.body.appendChild(modalEl);
 };
 
 const hideQuestionaire = () => {
-  console.log('[feedback] Hiding questionaire');
+  console.log("[feedback] Hiding questionaire");
   // remove your questionaire modal
-  const modalEl = document.getElementById('questionaire-modal');
+  const modalEl = document.getElementById("questionaire-modal");
   if (modalEl) {
     modalEl.remove();
   }
@@ -160,10 +177,10 @@ const hideQuestionaire = () => {
 
 // callback if questionaire has been submitted
 const handleQuestionaireSubmit = () => {
-  console.log('[feedback] Questionaire has been submitted');
+  console.log("[feedback] Questionaire has been submitted");
 
   saveQuestionaireStatus({
-    status: 'submitted',
+    status: "submitted",
   });
 
   hideQuestionaire();
@@ -177,7 +194,7 @@ const handleQuestionaireSubmit = () => {
 
 // callback if questionaire has been cancelled
 const handleQuestionaireCancel = () => {
-  console.log('[feedback] Questionaire has been cancelled');
+  console.log("[feedback] Questionaire has been cancelled");
 
   hideQuestionaire();
 
@@ -189,10 +206,11 @@ const handleQuestionaireCancel = () => {
 };
 
 // process message from iframe
-window.addEventListener('message', (e) => {
+window.addEventListener("message", (e) => {
   const msg = e;
-  console.log(msg)
-  hideQuestionaire()
+  console.log(msg);
+  hideQuestionaire();
+  setTimeout(() => tcicEndAndLeaveClass, 100);
   // if(e.origin.includes('tms'))
   // if (msg && msg.type === 'feedback-result') {
   //   switch (msg.data.result) {
@@ -205,6 +223,54 @@ window.addEventListener('message', (e) => {
   //   }
   // }
 });
+
+// show a custom "End Class" msgbox
+const showEndClassMsgBox = () => {
+  TCIC.SDK.instance.showMessageBox(
+    // title
+    "Are you sure you want to End/Leave the Class?",
+    // message
+    'Click on "End Class" to end the on-going Class.<br>Click on "Leave Class", if you want to re-join the Class later again.',
+    // buttons
+    ["Cancel", "Leave Class", "End Class"],
+    // callback
+    (btnIndex) => {
+      if (btnIndex === 1) {
+        // Leave Class
+        console.log('[feedback] "Leave Class" button clicked');
+
+        TCIC.SDK.instance.unInitialize();
+      } else if (btnIndex === 2) {
+        // End Class
+        console.log('[feedback] "End Class" button clicked');
+
+        if (questionaireStatus !== "submitted") {
+          // marked as "ending class", continue end class process until questionaire submitted or cancelled
+          isEndingClass = true;
+          showQuestionaire();
+        } else {
+          tcicEndAndLeaveClass();
+        }
+      }
+    }
+  );
+};
+
+const tcicEndAndLeaveClass = () => {
+  TCIC.SDK.instance
+    .endClass()
+    .then(() => {
+      TCIC.SDK.instance.unInitialize();
+    })
+    .catch((error) => {
+      if (error.errorCode === 10301) {
+        // class already ended
+        TCIC.SDK.instance.unInitialize();
+      } else {
+        window.showToast(`End Class fail: ${error.errorMsg}`, "error");
+      }
+    });
+};
 
 // for debug usage only
 window.showQuestionaire = showQuestionaire;
