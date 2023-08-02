@@ -159,15 +159,15 @@ const showQuestionaire = (isLeaving) => {
 
   // construct URL to your questionaire (with roomId in query string)
   // const questionaireUrl = `http://localhost:8088/embedded_questionaire.html?roomId=${roomId}`;
-  const customParam = new URLSearchParams(
+  let customParam = new URLSearchParams(
     window.location.href || document.location.href
   );
-  customParam = customParam.get("session");
+  let param = customParam.get("session");
   alert(customParam);
   // window.location.href.split("session=")[1].split("&")[0] ||
   // window.location.href.split("session=")[1];
   alert(customParam);
-  const questionaireUrl = `http://localhost:4200/give/class/feedback/${customParam}`;
+  const questionaireUrl = `http://localhost:4200/give/class/feedback/${param}`;
   console.log(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
   const modalEl = document.createElement("div");
