@@ -154,7 +154,9 @@ const showQuestionaire = (isLeaving) => {
 
   // construct URL to your questionaire (with roomId in query string)
   // const questionaireUrl = `http://localhost:8088/embedded_questionaire.html?roomId=${roomId}`;
-  const customParam = window.location.href.replaceAll("/", "");
+  const customParam =
+    window.location.href.split("session=")[1].split("&")[0] ||
+    window.location.href.split("session=")[1];
   const questionaireUrl = `http://localhost:4200/dashboard/${customParam}`;
   console.log(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
