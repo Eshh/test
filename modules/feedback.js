@@ -6,6 +6,18 @@ try {
   alert("oops");
 }
 
+async function test() {
+  try {
+    const res = await (
+      await fetch("https://jsonplaceholder.typicode.com/todos/1")
+    ).json();
+    alert(res.title);
+  } catch {
+    alert("oops 2");
+  }
+}
+test();
+
 let checkTimer = null;
 let questionaireStatus = null; // null | 'submitted'
 let questionairePromptedInClass = false;
