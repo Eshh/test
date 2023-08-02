@@ -1,5 +1,10 @@
 console.log("JS loaded");
-alert(window.location.href);
+try {
+  alert(window.location.href);
+  alert(document.location.href);
+} catch {
+  alert("oops");
+}
 
 let checkTimer = null;
 let questionaireStatus = null; // null | 'submitted'
