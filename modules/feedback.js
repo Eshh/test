@@ -1,4 +1,6 @@
 console.log("JS loaded");
+console.log(window.location);
+
 let checkTimer = null;
 let questionaireStatus = null; // null | 'submitted'
 let questionairePromptedInClass = false;
@@ -152,7 +154,7 @@ const showQuestionaire = (isLeaving) => {
 
   // construct URL to your questionaire (with roomId in query string)
   // const questionaireUrl = `http://localhost:8088/embedded_questionaire.html?roomId=${roomId}`;
-  const questionaireUrl = `http://localhost:4200/dashboard`;
+  const questionaireUrl = `http://localhost:4200/dashboard/${window.location.href}`;
   console.log(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
   const modalEl = document.createElement("div");
