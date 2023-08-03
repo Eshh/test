@@ -221,7 +221,7 @@ const handleQuestionaireCancel = () => {
 window.addEventListener("message", (e) => {
   const msg = e;
   console.log(msg);
-  this.handleQuestionaireSubmit();
+  handleQuestionaireSubmit();
   // msg ? handleQuestionaireSubmit() : handleQuestionaireCancel;
   // setTimeout(() => showEndClassMsgBox(), 100);
   // if(e.origin.includes('tms'))
