@@ -1,29 +1,152 @@
 console.log("JS loaded");
-try {
-  alert(window.location.href);
-  alert(document.location.href);
-} catch {
-  alert("oops");
-}
-
-async function test() {
-  try {
-    const res = await (
-      await fetch("https://jsonplaceholder.typicode.com/todos/1")
-    ).json();
-    alert(res.title);
-  } catch {
-    alert("oops 2");
-  }
-}
-test();
-
+// try {
+//   alert(window.location.href);
+//   alert(document.location.href);
+// } catch {
+//   alert("oops");
+// }
 let checkTimer = null;
 let questionaireStatus = null; // null | 'submitted'
 let questionairePromptedInClass = false;
-
+let isLeavingClass = false;
+let isEndingClass = false;
 const questionaireTaskId = "custom-task-questionaire";
 
+// wait until joined class
+TCIC.SDK.instance.promiseState(TCIC.TMainState.Joined_Class, true).then(() => {
+  // check if current user is teacher
+  if (TCIC.SDK.instance.isTeacher()) {
+    onTeacherJoinedClass();
+  }
+});
+
+// called after teacher joined class
+const onTeacherJoinedClass = () => {
+  loadQuestionaireStatus().then(() => {
+    TCIC.SDK.instance.subscribeState(
+      TCIC.TMainState.Class_Status,
+      (classStatus) => {
+        // only check if class not ended
+        if (classStatus === TCIC.TClassStatus.Already_Start) {
+          startCheckTimer();
+        } else {
+          stopCheckTimer();
+        }
+      }
+    );
+
+    // show questionaire if "End Class" button has been clicked
+    const endClassButton = document.querySelector(".header__button--start");
+    endClassButton.addEventListener(
+      "click",
+      (event) => {
+        console.log("[feedback] End Class button has been clicked");
+        if (
+          TCIC.SDK.instance.getState(TCIC.TMainState.Class_Status) ===
+            TCIC.TClassStatus.Already_Start &&
+          questionaireStatus !== "submitted"
+        ) {
+          event.stopPropagation();
+          showQuestionaire(true);
+        }
+      },
+      {
+        capture: true,
+      }
+    );
+  });
+};
+// status from tencent server
+const loadQuestionaireStatus = () =>
+  TCIC.SDK.instance
+    .getTasks(0, true)
+    .then((result) => {
+      const questionaireTask = result.tasks.find(
+        (task) => task.taskId === questionaireTaskId
+      );
+      if (questionaireTask) {
+        const content = JSON.parse(questionaireTask.content);
+        questionaireStatus = content.status;
+        questionairePromptedInClass = content.promptedInClass;
+        console.log("[feedback] questionaireStatus", questionaireStatus);
+        console.log(
+          "[feedback] questionairePromptedInClass",
+          questionairePromptedInClass
+        );
+      }
+    })
+    .catch((err) => {
+      console.error("[feedback] loadQuestionaireStatus fail", err);
+    });
+
+// start periodical check , calls checkShowQuestionaire method in setInterval
+const startCheckTimer = () => {
+  if (checkTimer) return;
+  checkTimer = setInterval(checkShowQuestionaire, 1000);
+};
+
+// stop periodical check
+const stopCheckTimer = () => {
+  if (!checkTimer) return;
+  clearInterval(checkTimer);
+  checkTimer = null;
+};
+
+// check when to show questionaire
+const checkShowQuestionaire = () => {
+  // prompt only once
+  if (questionairePromptedInClass) {
+    return;
+  }
+
+  if (questionaireStatus === "submitted") {
+    return;
+  }
+
+  const classEndTime = TCIC.SDK.instance.getClassInfo().endTime * 1000;
+  const now = TCIC.SDK.instance.getServerTimestamp();
+
+  // less than 5 minutes to the end of class
+  if (now < classEndTime) {
+    showQuestionaire();
+    console.log("if");
+
+    // mark questionaire as prompted
+    saveQuestionaireStatus({
+      promptedInClass: true,
+    });
+  }
+};
+
+// method to trigger iframe
+const showQuestionaire = (isLeaving) => {
+  console.log("[feedback] Showing questionaire");
+  isLeavingClass = isLeaving;
+  // get room id
+  const roomId = TCIC.SDK.instance.getClassInfo().classId;
+  // construct URL to your questionaire (with roomId in query string)
+  let customParam = new URLSearchParams(
+    window.location.href || document.location.href
+  );
+  let sessionIdTms = customParam.get("sessionId");
+  let boxIdTms = customParam.get("boxId");
+  // window.location.href.split("session=")[1].split("&")[0] ||
+  // window.location.href.split("session=")[1];
+  const questionaireUrl = `http://localhost:4200/give/class/feedback/${roomId}/${sessionIdTms}/${boxIdTms}`;
+  console.log(questionaireUrl);
+  const randomUniqueIdentifier = Math.floor(Math.random() * 100);
+  const modalEl = document.createElement("div");
+  modalEl.innerHTML = `
+  <div class="questionaire-modal__content">
+    <iframe class="questionaire-modal__iframe" name="${randomUniqueIdentifier}" src="${questionaireUrl}"></iframe>
+  </div>
+`;
+  modalEl.className = "questionaire-modal";
+  modalEl.id = "questionaire-modal";
+  document.body.appendChild(modalEl);
+};
+
+// status to tencent server
 const saveQuestionaireStatus = (params) => {
   questionaireStatus =
     params.status !== undefined ? params.status : questionaireStatus;
@@ -50,149 +173,7 @@ const saveQuestionaireStatus = (params) => {
   );
 };
 
-const loadQuestionaireStatus = () =>
-  TCIC.SDK.instance
-    .getTasks(0, true)
-    .then((result) => {
-      const questionaireTask = result.tasks.find(
-        (task) => task.taskId === questionaireTaskId
-      );
-      if (questionaireTask) {
-        const content = JSON.parse(questionaireTask.content);
-        questionaireStatus = content.status;
-        questionairePromptedInClass = content.promptedInClass;
-        console.log("[feedback] questionaireStatus", questionaireStatus);
-        console.log(
-          "[feedback] questionairePromptedInClass",
-          questionairePromptedInClass
-        );
-      }
-    })
-    .catch((err) => {
-      console.error("[feedback] loadQuestionaireStatus fail", err);
-    });
-
-// check if questionaire should be shown (5 mintues before the end of class)
-const checkShowQuestionaire = () => {
-  // prompt only once
-  if (questionairePromptedInClass) {
-    return;
-  }
-
-  if (questionaireStatus === "submitted") {
-    return;
-  }
-
-  const classEndTime = TCIC.SDK.instance.getClassInfo().endTime * 1000;
-  const now = TCIC.SDK.instance.getServerTimestamp();
-
-  // less than 5 minutes to the end of class
-  showQuestionaire();
-  if (now < classEndTime) {
-    console.log("if");
-
-    // mark questionaire as prompted
-    saveQuestionaireStatus({
-      promptedInClass: true,
-    });
-  }
-};
-
-// start periodical check
-const startCheckTimer = () => {
-  if (checkTimer) return;
-  checkTimer = setInterval(checkShowQuestionaire, 1000);
-};
-
-// stop periodical check
-const stopCheckTimer = () => {
-  if (!checkTimer) return;
-  clearInterval(checkTimer);
-  checkTimer = null;
-};
-
-// called after teacher joined class
-const onTeacherJoinedClass = () => {
-  loadQuestionaireStatus().then(() => {
-    TCIC.SDK.instance.subscribeState(
-      TCIC.TMainState.Class_Status,
-      (classStatus) => {
-        // only check if class not ended
-        if (classStatus === TCIC.TClassStatus.Already_Start) {
-          startCheckTimer();
-        } else {
-          stopCheckTimer();
-        }
-      }
-    );
-
-    // show questionaire if "End Class" button has been clicked
-    const endClassButton = document.querySelector(".header__button--start");
-    endClassButton.addEventListener(
-      "click",
-      (event) => {
-        console.log("[feedback] End Class button has been clicked");
-
-        if (
-          TCIC.SDK.instance.getState(TCIC.TMainState.Class_Status) ===
-            TCIC.TClassStatus.Already_Start &&
-          questionaireStatus !== "submitted"
-        ) {
-          event.stopPropagation();
-          showQuestionaire(true);
-        }
-      },
-      {
-        capture: true,
-      }
-    );
-  });
-};
-
-// wait until joined class
-TCIC.SDK.instance.promiseState(TCIC.TMainState.Joined_Class, true).then(() => {
-  // check if current user is teacher
-  if (TCIC.SDK.instance.isTeacher()) {
-    onTeacherJoinedClass();
-  }
-});
-
-let isLeavingClass = false;
-
-const showQuestionaire = (isLeaving) => {
-  console.log("[feedback] Showing questionaire");
-
-  isLeavingClass = isLeaving;
-
-  // get room id
-  const roomId = TCIC.SDK.instance.getClassInfo().classId;
-
-  // show your questionaire modal:
-
-  // construct URL to your questionaire (with roomId in query string)
-  // const questionaireUrl = `http://localhost:8088/embedded_questionaire.html?roomId=${roomId}`;
-  let customParam = new URLSearchParams(
-    window.location.href || document.location.href
-  );
-  let param = customParam.get("session");
-  alert(customParam);
-  // window.location.href.split("session=")[1].split("&")[0] ||
-  // window.location.href.split("session=")[1];
-  alert(customParam);
-  const questionaireUrl = `http://localhost:4200/give/class/feedback/${param}`;
-  console.log(questionaireUrl);
-  const randomUniqueIdentifier = Math.floor(Math.random() * 100);
-  const modalEl = document.createElement("div");
-  modalEl.innerHTML = `
-  <div class="questionaire-modal__content">
-    <iframe class="questionaire-modal__iframe" name="${randomUniqueIdentifier}" src="${questionaireUrl}"></iframe>
-  </div>
-`;
-  modalEl.className = "questionaire-modal";
-  modalEl.id = "questionaire-modal";
-  document.body.appendChild(modalEl);
-};
-
+// utility to hide iframe modal
 const hideQuestionaire = () => {
   console.log("[feedback] Hiding questionaire");
   // remove your questionaire modal
@@ -205,39 +186,40 @@ const hideQuestionaire = () => {
 // callback if questionaire has been submitted
 const handleQuestionaireSubmit = () => {
   console.log("[feedback] Questionaire has been submitted");
-
   saveQuestionaireStatus({
     status: "submitted",
   });
-
   hideQuestionaire();
-
   // continue leaving class
   if (isLeavingClass) {
     isLeavingClass = false;
     TCIC.SDK.instance.leaveClass();
+  }
+  if (isEndingClass) {
+    tcicEndAndLeaveClass();
   }
 };
 
 // callback if questionaire has been cancelled
 const handleQuestionaireCancel = () => {
   console.log("[feedback] Questionaire has been cancelled");
-
   hideQuestionaire();
-
   // continue leaving class
   if (isLeavingClass) {
     isLeavingClass = false;
     TCIC.SDK.instance.leaveClass();
   }
+  if (isEndingClass) {
+    tcicEndAndLeaveClass();
+  }
 };
 
-// process message from iframe
+// postMessage from tms iframe
 window.addEventListener("message", (e) => {
   const msg = e;
   console.log(msg);
-  hideQuestionaire();
-  setTimeout(() => showEndClassMsgBox(), 100);
+  msg ? handleQuestionaireSubmit() : handleQuestionaireCancel;
+  // setTimeout(() => showEndClassMsgBox(), 100);
   // if(e.origin.includes('tms'))
   // if (msg && msg.type === 'feedback-result') {
   //   switch (msg.data.result) {
@@ -282,7 +264,7 @@ const showEndClassMsgBox = () => {
     }
   );
 };
-
+// when end/leave class is clicked
 const tcicEndAndLeaveClass = () => {
   console.log("end class popup");
   TCIC.SDK.instance
