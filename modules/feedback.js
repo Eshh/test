@@ -144,6 +144,7 @@ const showQuestionaire = (isLeaving) => {
   modalEl.className = "questionaire-modal";
   modalEl.id = "questionaire-modal";
   document.body.appendChild(modalEl);
+  handleQuestionaireSubmit();
 };
 
 // status to tencent server
@@ -196,6 +197,7 @@ const handleQuestionaireSubmit = () => {
     TCIC.SDK.instance.leaveClass();
   }
   if (isEndingClass) {
+    isEndingClass = false;
     tcicEndAndLeaveClass();
   }
 };
@@ -210,6 +212,7 @@ const handleQuestionaireCancel = () => {
     TCIC.SDK.instance.leaveClass();
   }
   if (isEndingClass) {
+    isEndingClass = false;
     tcicEndAndLeaveClass();
   }
 };
@@ -218,7 +221,7 @@ const handleQuestionaireCancel = () => {
 window.addEventListener("message", (e) => {
   const msg = e;
   console.log(msg);
-  msg ? handleQuestionaireSubmit() : handleQuestionaireCancel;
+  // msg ? handleQuestionaireSubmit() : handleQuestionaireCancel;
   // setTimeout(() => showEndClassMsgBox(), 100);
   // if(e.origin.includes('tms'))
   // if (msg && msg.type === 'feedback-result') {
