@@ -188,9 +188,13 @@ const hideQuestionaire = () => {
 const handleQuestionaireSubmit = () => {
   console.log("[feedback] Questionaire has been submitted");
   setTimeout(() => {
-    saveQuestionaireStatus({
-      status: "submitted",
-    });
+    try {
+      saveQuestionaireStatus({
+        status: "submitted",
+      });
+    } catch (err) {
+      alert("oops 2", err);
+    }
     hideQuestionaire();
     // continue leaving class
     if (isLeavingClass) {
@@ -221,7 +225,13 @@ const handleQuestionaireCancel = () => {
 
 // postMessage from tms iframe
 window.addEventListener("message", (e) => {
-  setTimeout(() => handleQuestionaireSubmit(), 100);
+  setTimeout(() => {
+    try {
+      handleQuestionaireSubmit();
+    } catch (err) {
+      alert("oops", err);
+    }
+  }, 100);
   // const msg = e;
   console.log(e);
   // handleQuestionaireSubmit();
