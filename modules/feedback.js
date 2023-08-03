@@ -187,19 +187,21 @@ const hideQuestionaire = () => {
 // callback if questionaire has been submitted
 const handleQuestionaireSubmit = () => {
   console.log("[feedback] Questionaire has been submitted");
-  saveQuestionaireStatus({
-    status: "submitted",
-  });
-  hideQuestionaire();
-  // continue leaving class
-  if (isLeavingClass) {
-    isLeavingClass = false;
-    TCIC.SDK.instance.leaveClass();
-  }
-  if (isEndingClass) {
-    isEndingClass = false;
-    tcicEndAndLeaveClass();
-  }
+  setTimeout(() => {
+    saveQuestionaireStatus({
+      status: "submitted",
+    });
+    hideQuestionaire();
+    // continue leaving class
+    if (isLeavingClass) {
+      isLeavingClass = false;
+      TCIC.SDK.instance.leaveClass();
+    }
+    if (isEndingClass) {
+      isEndingClass = false;
+      tcicEndAndLeaveClass();
+    }
+  }, 10);
 };
 
 // callback if questionaire has been cancelled
@@ -219,11 +221,11 @@ const handleQuestionaireCancel = () => {
 
 // postMessage from tms iframe
 window.addEventListener("message", (e) => {
-  const msg = e;
-  console.log(msg);
-  handleQuestionaireSubmit();
+  setTimeout(() => handleQuestionaireSubmit(), 100);
+  // const msg = e;
+  console.log(e);
+  // handleQuestionaireSubmit();
   // msg ? handleQuestionaireSubmit() : handleQuestionaireCancel;
-  // setTimeout(() => showEndClassMsgBox(), 100);
   // if(e.origin.includes('tms'))
   // if (msg && msg.type === 'feedback-result') {
   //   switch (msg.data.result) {
