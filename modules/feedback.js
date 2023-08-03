@@ -144,7 +144,7 @@ const showQuestionaire = (isLeaving) => {
   modalEl.className = "questionaire-modal";
   modalEl.id = "questionaire-modal";
   document.body.appendChild(modalEl);
-  handleQuestionaireSubmit();
+  // handleQuestionaireSubmit();
 };
 
 // status to tencent server
@@ -221,6 +221,7 @@ const handleQuestionaireCancel = () => {
 window.addEventListener("message", (e) => {
   const msg = e;
   console.log(msg);
+  this.handleQuestionaireSubmit();
   // msg ? handleQuestionaireSubmit() : handleQuestionaireCancel;
   // setTimeout(() => showEndClassMsgBox(), 100);
   // if(e.origin.includes('tms'))
