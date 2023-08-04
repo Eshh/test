@@ -130,9 +130,10 @@ const showQuestionaire = (isLeaving) => {
   );
   let sessionIdTms = customParam.get("sessionId");
   let boxIdTms = customParam.get("boxId");
+  let contentIdTms = customParam.get("contentId");
   // window.location.href.split("session=")[1].split("&")[0] ||
   // window.location.href.split("session=")[1];
-  const questionaireUrl = `http://localhost:4200/give/class/feedback/${roomId}/${sessionIdTms}/${boxIdTms}`;
+  const questionaireUrl = `http://localhost:4200/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
   console.log(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
   const modalEl = document.createElement("div");
