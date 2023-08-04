@@ -237,7 +237,7 @@ window.addEventListener("message", (e) => {
   console.log(e);
   // if (e.origin.includes("tms")) {
   // if (msg && msg.type === 'feedback-result') {
-  switch (e) {
+  switch (e.data) {
     case "feedback-submitted":
       handleQuestionaireSubmit();
       break;
