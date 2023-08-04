@@ -300,10 +300,10 @@ const tcicEndAndLeaveClass = () => {
 };
 
 // for debug usage only
-window.showQuestionaire = showQuestionaire;
-window.hideQuestionaire = hideQuestionaire;
-window.clearQuestionaireStatus = () => {
-  saveQuestionaireStatus({
-    status: null,
-  });
-};
+// window.showQuestionaire = showQuestionaire;
+// window.hideQuestionaire = hideQuestionaire;
+// window.clearQuestionaireStatus = () => {
+//   saveQuestionaireStatus({
+//     status: null,
+//   });
+// };
