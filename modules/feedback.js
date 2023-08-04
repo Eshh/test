@@ -226,27 +226,27 @@ const handleQuestionaireCancel = () => {
 
 // postMessage from tms iframe
 window.addEventListener("message", (e) => {
-  setTimeout(() => {
-    try {
-      handleQuestionaireSubmit();
-    } catch (err) {
-      alert("oops", err);
-    }
-  }, 100);
+  // setTimeout(() => {
+  //   try {
+  //     handleQuestionaireSubmit();
+  //   } catch (err) {
+  //     alert("oops", err);
+  //   }
+  // }, 100);
   // const msg = e;
   console.log(e);
-  // handleQuestionaireSubmit();
-  // msg ? handleQuestionaireSubmit() : handleQuestionaireCancel;
-  // if(e.origin.includes('tms'))
+  // if (e.origin.includes("tms")) {
   // if (msg && msg.type === 'feedback-result') {
-  //   switch (msg.data.result) {
-  //     case 'submit':
-  //       handleQuestionaireSubmit();
-  //       break;
-  //     case 'cancel':
-  //       handleQuestionaireCancel();
-  //       break;
-  //   }
+  switch (msg) {
+    case "feedback-submitted":
+      handleQuestionaireSubmit();
+      break;
+    case "feedback-skip":
+    case "feedback-fail":
+    case "feedback-error":
+      handleQuestionaireCancel();
+      break;
+  }
   // }
 });
 
