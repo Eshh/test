@@ -35,7 +35,7 @@ const onTeacherJoinedClass = () => {
       }
     );
 
-    // show questionaire if "End Class" button has been clicked
+    //show questionaire if "End Class" button has been clicked
     const endClassButton = document.querySelector(".header__button--start");
     endClassButton.addEventListener(
       "click",
@@ -47,7 +47,8 @@ const onTeacherJoinedClass = () => {
           questionaireStatus !== "submitted"
         ) {
           event.stopPropagation();
-          showQuestionaire(true);
+          showEndClassMsgBox();
+          // showQuestionaire(true);
         }
       },
       {
@@ -107,7 +108,7 @@ const checkShowQuestionaire = () => {
   const now = TCIC.SDK.instance.getServerTimestamp();
 
   // less than 5 minutes to the end of class
-  if (now < classEndTime) {
+  if (now >= classEndTime - 5 * 60 * 1000) {
     showQuestionaire();
     console.log("if");
 
