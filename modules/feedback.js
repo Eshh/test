@@ -11,11 +11,15 @@ let questionairePromptedInClass = false;
 let isLeavingClass = false;
 let isEndingClass = false;
 const questionaireTaskId = "custom-task-questionaire";
+let customParam = new URLSearchParams(
+  window.location.href || document.location.href
+);
+let feedbackSetting = customParam.get("feedbackSetting");
 
 // wait until joined class
 TCIC.SDK.instance.promiseState(TCIC.TMainState.Joined_Class, true).then(() => {
   // check if current user is teacher
-  if (TCIC.SDK.instance.isTeacher()) {
+  if (TCIC.SDK.instance.isTeacher() && feedbackSetting != "disabled") {
     onTeacherJoinedClass();
   }
 });
@@ -126,9 +130,9 @@ const showQuestionaire = (isLeaving) => {
   // get room id
   const roomId = TCIC.SDK.instance.getClassInfo().classId;
   // construct URL to your questionaire (with roomId in query string)
-  let customParam = new URLSearchParams(
-    window.location.href || document.location.href
-  );
+  //  customParam = new URLSearchParams(
+  //   window.location.href || document.location.href
+  // );
   let sessionIdTms = customParam.get("sessionId");
   let boxIdTms = customParam.get("boxId");
   let contentIdTms = customParam.get("contentId");
