@@ -130,7 +130,7 @@ const showQuestionaire = (isLeaving) => {
     window.location.href || document.location.href
   );
   let sessionIdTms = customParam.get("sessionId");
-  let boxIdTms = customParam.get("boxId");
+  let boxIdTms = customParam.get("boxId").trim();
   let contentIdTms = customParam.get("contentId");
   // window.location.href.split("session=")[1].split("&")[0] ||
   // window.location.href.split("session=")[1];
