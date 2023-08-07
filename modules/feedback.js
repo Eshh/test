@@ -15,7 +15,6 @@ let customParam = new URLSearchParams(
   window.location.href || document.location.href
 );
 let feedbackSetting = customParam.get("feedbackSetting").trim();
-console.log(feedbackSetting, "eshwar");
 
 // wait until joined class
 TCIC.SDK.instance.promiseState(TCIC.TMainState.Joined_Class, true).then(() => {
@@ -45,7 +44,6 @@ const onTeacherJoinedClass = () => {
     endClassButton.addEventListener(
       "click",
       (event) => {
-        console.log("[feedback] End Class button has been clicked");
         if (
           TCIC.SDK.instance.getState(TCIC.TMainState.Class_Status) ===
             TCIC.TClassStatus.Already_Start &&
@@ -74,16 +72,9 @@ const loadQuestionaireStatus = () =>
         const content = JSON.parse(questionaireTask.content);
         questionaireStatus = content.status;
         questionairePromptedInClass = content.promptedInClass;
-        console.log("[feedback] questionaireStatus", questionaireStatus);
-        console.log(
-          "[feedback] questionairePromptedInClass",
-          questionairePromptedInClass
-        );
       }
     })
-    .catch((err) => {
-      console.error("[feedback] loadQuestionaireStatus fail", err);
-    });
+    .catch((err) => {});
 
 // start periodical check , calls checkShowQuestionaire method in setInterval
 const startCheckTimer = () => {
@@ -115,7 +106,6 @@ const checkShowQuestionaire = () => {
   // less than 5 minutes to the end of class
   if (now >= classEndTime - 5 * 60 * 1000) {
     showQuestionaire();
-    console.log("if");
 
     // mark questionaire as prompted
     saveQuestionaireStatus({
@@ -127,7 +117,6 @@ const checkShowQuestionaire = () => {
 // method to trigger iframe
 const showQuestionaire = (isLeaving) => {
   if (feedbackSetting == "disabled") return;
-  console.log("[feedback] Showing questionaire");
   isLeavingClass = isLeaving;
   // get room id
   const roomId = TCIC.SDK.instance.getClassInfo().classId;
@@ -170,8 +159,6 @@ const saveQuestionaireStatus = (params) => {
     timestamp: TCIC.SDK.instance.getServerTimestamp(),
   });
 
-  console.log("[feedback] updateTask", questionaireTaskId, content);
-
   TCIC.SDK.instance.updateTask(
     questionaireTaskId, // taskId
     content, // content
@@ -184,7 +171,6 @@ const saveQuestionaireStatus = (params) => {
 
 // utility to hide iframe modal
 const hideQuestionaire = () => {
-  console.log("[feedback] Hiding questionaire");
   // remove your questionaire modal
   const modalEl = document.getElementById("questionaire-modal");
   if (modalEl) {
@@ -194,7 +180,6 @@ const hideQuestionaire = () => {
 
 // callback if questionaire has been submitted
 const handleQuestionaireSubmit = () => {
-  console.log("[feedback] Questionaire has been submitted");
   setTimeout(() => {
     try {
       saveQuestionaireStatus({
@@ -218,7 +203,6 @@ const handleQuestionaireSubmit = () => {
 
 // callback if questionaire has been cancelled
 const handleQuestionaireCancel = () => {
-  console.log("[feedback] Questionaire has been cancelled");
   hideQuestionaire();
   // continue leaving class
   if (isLeavingClass) {
@@ -270,13 +254,10 @@ const showEndClassMsgBox = () => {
     (btnIndex) => {
       if (btnIndex === 1) {
         // Leave Class
-        console.log('[feedback] "Leave Class" button clicked');
 
         TCIC.SDK.instance.unInitialize();
       } else if (btnIndex === 2) {
         // End Class
-        console.log('[feedback] "End Class" button clicked');
-
         if (
           questionaireStatus !== "submitted" &&
           feedbackSetting != "disabled"
@@ -293,7 +274,6 @@ const showEndClassMsgBox = () => {
 };
 // when end/leave class is clicked
 const tcicEndAndLeaveClass = () => {
-  console.log("end class popup");
   TCIC.SDK.instance
     .endClass()
     .then(() => {
