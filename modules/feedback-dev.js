@@ -134,7 +134,7 @@ const showQuestionaire = (isLeaving) => {
   let contentIdTms = customParam.get("contentId");
   // window.location.href.split("session=")[1].split("&")[0] ||
   // window.location.href.split("session=")[1];
-  const questionaireUrl = `https://qa4-tms.turito.com/dashboard`;
+  const questionaireUrl = `https://qa4-tms.turito.com/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
   //   alert(questionaireUrl);
   console.log(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
