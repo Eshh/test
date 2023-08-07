@@ -275,7 +275,10 @@ const showEndClassMsgBox = () => {
         // End Class
         console.log('[feedback] "End Class" button clicked');
 
-        if (questionaireStatus !== "submitted") {
+        if (
+          questionaireStatus !== "submitted" &&
+          feedbackSetting != "disabled"
+        ) {
           // marked as "ending class", continue end class process until questionaire submitted or cancelled
           isEndingClass = true;
           showQuestionaire();
