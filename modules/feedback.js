@@ -15,6 +15,7 @@ let customParam = new URLSearchParams(
   window.location.href || document.location.href
 );
 let feedbackSetting = customParam.get("feedbackSetting");
+console.log(feedbackSetting, "eshwar");
 
 // wait until joined class
 TCIC.SDK.instance.promiseState(TCIC.TMainState.Joined_Class, true).then(() => {
@@ -125,6 +126,7 @@ const checkShowQuestionaire = () => {
 
 // method to trigger iframe
 const showQuestionaire = (isLeaving) => {
+  if (feedbackSetting == "disabled") return;
   console.log("[feedback] Showing questionaire");
   isLeavingClass = isLeaving;
   // get room id
