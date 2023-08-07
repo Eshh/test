@@ -14,7 +14,7 @@ const questionaireTaskId = "custom-task-questionaire";
 let customParam = new URLSearchParams(
   window.location.href || document.location.href
 );
-let feedbackSetting = customParam.get("feedbackSetting");
+let feedbackSetting = customParam.get("feedbackSetting").trim();
 console.log(feedbackSetting, "eshwar");
 
 // wait until joined class
