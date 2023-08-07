@@ -256,7 +256,7 @@ window.addEventListener("message", (e) => {
 const showEndClassMsgBox = () => {
   TCIC.SDK.instance.showMessageBox(
     // title
-    "Are you sure you want to End/Leave the Class?",
+    "Eshwar Are you sure you want to End/Leave the Class?",
     // message
     'Click on "End Class" to end the on-going Class.<br>Click on "Leave Class", if you want to re-join the Class later again.',
     // buttons
