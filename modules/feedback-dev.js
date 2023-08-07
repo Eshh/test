@@ -135,7 +135,7 @@ const showQuestionaire = (isLeaving) => {
   // window.location.href.split("session=")[1].split("&")[0] ||
   // window.location.href.split("session=")[1];
   const questionaireUrl = `http://localhost:4200/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
-  alert(questionaireUrl);
+  //   alert(questionaireUrl);
   console.log(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
   const modalEl = document.createElement("div");
