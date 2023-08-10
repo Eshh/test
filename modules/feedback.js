@@ -91,6 +91,10 @@ const stopCheckTimer = () => {
 
 // check when to show questionaire
 const checkShowQuestionaire = () => {
+  console.log(
+    TCIC.TMainState.Class_Status,
+    TCIC.SDK.instance.getState(TCIC.TMainState.Class_Status, "eshwar mehreen")
+  );
   // prompt only once
   if (questionairePromptedInClass) {
     return;
