@@ -32,7 +32,13 @@ const onTeacherJoinedClass = () => {
       (classStatus) => {
         // only check if class not ended
         if (classStatus === TCIC.TClassStatus.Already_Start) {
-          startCheckTimer();
+          // wait until device detection finished
+          TCIC.SDK.instance
+            .promiseState("TStateDeviceDetect", false)
+            .then(() => {
+              startCheckTimer();
+              // do something
+            });
         } else {
           stopCheckTimer();
         }
