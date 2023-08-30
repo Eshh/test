@@ -32,7 +32,13 @@ const onTeacherJoinedClass = () => {
       (classStatus) => {
         // only check if class not ended
         if (classStatus === TCIC.TClassStatus.Already_Start) {
-          startCheckTimer();
+          // // wait until device detection finished
+          TCIC.SDK.instance
+            .promiseState("TStateDeviceDetect", false)
+            .then(() => {
+              startCheckTimer();
+            });
+          // startCheckTimer();
         } else {
           stopCheckTimer();
         }
@@ -91,6 +97,9 @@ const stopCheckTimer = () => {
 
 // check when to show questionaire
 const checkShowQuestionaire = () => {
+  console.log(
+    TCIC.TMainState.Class_Status,
+  );
   // prompt only once
   if (questionairePromptedInClass) {
     return;
@@ -129,7 +138,7 @@ const showQuestionaire = (isLeaving) => {
   let contentIdTms = customParam.get("contentId");
   // window.location.href.split("session=")[1].split("&")[0] ||
   // window.location.href.split("session=")[1];
-  const questionaireUrl = `http://localhost:4200/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
+  const questionaireUrl = `https://qa4-tms.turito.com/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
   // alert(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
   const modalEl = document.createElement("div");
