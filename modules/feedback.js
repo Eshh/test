@@ -147,7 +147,7 @@ const showQuestionaire = (isLeaving) => {
   modalChild.className = "questionaire-modal__content";
   // close button
   const closeButton = document.createElement("button");
-  closeButton.textContent = "Close x";
+  closeButton.textContent = "X";
   closeButton.id = "close-iframe-tms";
   closeButton.addEventListener("click", () => handleQuestionaireCancel());
   closeButton.style = `
