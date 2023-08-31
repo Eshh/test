@@ -139,24 +139,36 @@ const showQuestionaire = (isLeaving) => {
   const questionaireUrl = `https://tms.turito.com/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
   // alert(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
+  // Dom methods
+  //parent
   const modalEl = document.createElement("div");
-  modalEl.innerHTML = `
-  <div class="questionaire-modal__content">
-  <button style="position: absolute;
+  // child
+  const modalChild = document.createElement("div");
+  modalChild.className = "questionaire-modal__content";
+  // close button
+  const closeButton = document.createElement("button");
+  closeButton.id = "close-iframe-tms";
+  closeButton.addEventListener("click", () => handleQuestionaireCancel());
+  closeButton.style = `position: absolute;
     z-index: 250000;
     color: white;
     right: 10px;
     background-color: red;
     padding: 3px 6px;
-    border-radius: 5px;" id="close-iframe-tms">Close</button>
-    <iframe class="questionaire-modal__iframe" name="${randomUniqueIdentifier}" src="${questionaireUrl}"></iframe>
-  </div>
-`;
+    border-radius: 5px;`;
+  //iframe
+  const iframeEl = document.createElement("iframe");
+  iframeEl.name = randomUniqueIdentifier;
+  iframeEl.src = questionaireUrl;
+  //   modalEl.innerHTML = `
+  //     <iframe class="questionaire-modal__iframe" name="${randomUniqueIdentifier}" src="${}"></iframe>
+  // `;
+  modalChild.appendChild(closeButton);
+  modalChild.appendChild(iframeEl);
+  modalEl.appendChild(modalChild);
   modalEl.className = "questionaire-modal";
   modalEl.id = "questionaire-modal";
   document.body.appendChild(modalEl);
-  const closeIframeButton = document.querySelector("close-iframe-tms");
-  closeIframeButton.addEventListener("click", () => handleQuestionaireCancel());
   // handleQuestionaireSubmit();
 };
 
@@ -219,7 +231,7 @@ const handleQuestionaireSubmit = () => {
 
 // callback if questionaire has been cancelled
 const handleQuestionaireCancel = () => {
-  console.log('mehreen hide',isLeavingClass,isEndingClass)
+  console.log("mehreen hide", isLeavingClass, isEndingClass);
   hideQuestionaire();
   // continue leaving class
   if (isLeavingClass) {
