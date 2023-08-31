@@ -144,6 +144,13 @@ const showQuestionaire = (isLeaving) => {
   const modalEl = document.createElement("div");
   modalEl.innerHTML = `
   <div class="questionaire-modal__content">
+  <button style="position: absolute;
+    z-index: 250000;
+    color: white;
+    right: 10px;
+    background-color: red;
+    padding: 3px 6px;
+    border-radius: 5px;" id="close-iframe-tms">Close</button>
     <iframe class="questionaire-modal__iframe" name="${randomUniqueIdentifier}" src="${questionaireUrl}"></iframe>
   </div>
 `;
@@ -186,7 +193,7 @@ const hideQuestionaire = () => {
     modalEl.remove();
   }
 };
-
+document.getElementById('close-iframe-tms').addEventListener('click',()=>{handleQuestionaireCancel()})
 // callback if questionaire has been submitted
 const handleQuestionaireSubmit = () => {
   setTimeout(() => {
