@@ -156,7 +156,7 @@ const showQuestionaire = (isLeaving) => {
   modalEl.id = "questionaire-modal";
   document.body.appendChild(modalEl);
   const closeIframeButton = document.querySelector("close-iframe-tms");
-  closeIframeButton.addEventListener("click", () => hideQuestionaire());
+  closeIframeButton.addEventListener("click", () => handleQuestionaireCancel());
   // handleQuestionaireSubmit();
 };
 
