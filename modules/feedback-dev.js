@@ -97,9 +97,7 @@ const stopCheckTimer = () => {
 
 // check when to show questionaire
 const checkShowQuestionaire = () => {
-  console.log(
-    TCIC.TMainState.Class_Status,
-  );
+  console.log(TCIC.TMainState.Class_Status);
   // prompt only once
   if (questionairePromptedInClass) {
     return;
@@ -193,7 +191,6 @@ const hideQuestionaire = () => {
     modalEl.remove();
   }
 };
-document.getElementById('close-iframe-tms').addEventListener('click',()=>{handleQuestionaireCancel()})
 // callback if questionaire has been submitted
 const handleQuestionaireSubmit = () => {
   setTimeout(() => {
@@ -304,6 +301,9 @@ const tcicEndAndLeaveClass = () => {
       }
     });
 };
+
+const closeIframeButton = document.querySelector("close-iframe-tms");
+closeIframeButton.addEventListener("click", () => handleQuestionaireCancel());
 
 // for debug usage only
 // window.showQuestionaire = showQuestionaire;
