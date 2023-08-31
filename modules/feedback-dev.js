@@ -219,6 +219,7 @@ const handleQuestionaireSubmit = () => {
 
 // callback if questionaire has been cancelled
 const handleQuestionaireCancel = () => {
+  console.log('mehreen hide',isLeavingClass,isEndingClass)
   hideQuestionaire();
   // continue leaving class
   if (isLeavingClass) {
