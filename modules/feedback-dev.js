@@ -155,6 +155,8 @@ const showQuestionaire = (isLeaving) => {
   modalEl.className = "questionaire-modal";
   modalEl.id = "questionaire-modal";
   document.body.appendChild(modalEl);
+  const closeIframeButton = document.querySelector("close-iframe-tms");
+  closeIframeButton.addEventListener("click", () => handleQuestionaireCancel());
   // handleQuestionaireSubmit();
 };
 
@@ -302,8 +304,7 @@ const tcicEndAndLeaveClass = () => {
     });
 };
 
-const closeIframeButton = document.querySelector("close-iframe-tms");
-closeIframeButton.addEventListener("click", () => handleQuestionaireCancel());
+
 
 // for debug usage only
 // window.showQuestionaire = showQuestionaire;
