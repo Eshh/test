@@ -136,7 +136,7 @@ const showQuestionaire = (isLeaving) => {
   let contentIdTms = customParam.get("contentId");
   // window.location.href.split("session=")[1].split("&")[0] ||
   // window.location.href.split("session=")[1];
-  const questionaireUrl = `localhost:4200/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
+  const questionaireUrl = `https://tms.turito.com/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
   // alert(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
   const modalEl = document.createElement("div");
@@ -156,7 +156,7 @@ const showQuestionaire = (isLeaving) => {
   modalEl.id = "questionaire-modal";
   document.body.appendChild(modalEl);
   const closeIframeButton = document.querySelector("close-iframe-tms");
-  closeIframeButton.addEventListener("click", () => handleQuestionaireCancel());
+  closeIframeButton.addEventListener("click", () => hideQuestionaire());
   // handleQuestionaireSubmit();
 };
 
@@ -193,6 +193,7 @@ const hideQuestionaire = () => {
     modalEl.remove();
   }
 };
+
 // callback if questionaire has been submitted
 const handleQuestionaireSubmit = () => {
   setTimeout(() => {
@@ -303,8 +304,6 @@ const tcicEndAndLeaveClass = () => {
       }
     });
 };
-
-
 
 // for debug usage only
 // window.showQuestionaire = showQuestionaire;
