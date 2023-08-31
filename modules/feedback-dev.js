@@ -147,6 +147,7 @@ const showQuestionaire = (isLeaving) => {
   modalChild.className = "questionaire-modal__content";
   // close button
   const closeButton = document.createElement("button");
+  closeButton.textContent = "Close";
   closeButton.id = "close-iframe-tms";
   closeButton.addEventListener("click", () => handleQuestionaireCancel());
   closeButton.style = `position: absolute;
@@ -158,6 +159,7 @@ const showQuestionaire = (isLeaving) => {
     border-radius: 5px;`;
   //iframe
   const iframeEl = document.createElement("iframe");
+  iframeEl.className = "questionaire - modal__iframe";
   iframeEl.name = randomUniqueIdentifier;
   iframeEl.src = questionaireUrl;
   //   modalEl.innerHTML = `
