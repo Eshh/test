@@ -97,9 +97,7 @@ const stopCheckTimer = () => {
 
 // check when to show questionaire
 const checkShowQuestionaire = () => {
-  console.log(
-    TCIC.TMainState.Class_Status,
-  );
+  console.log(TCIC.TMainState.Class_Status);
   // prompt only once
   if (questionairePromptedInClass) {
     return;
@@ -138,15 +136,38 @@ const showQuestionaire = (isLeaving) => {
   let contentIdTms = customParam.get("contentId");
   // window.location.href.split("session=")[1].split("&")[0] ||
   // window.location.href.split("session=")[1];
-  const questionaireUrl = `https://tms.turito.com/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
+  const questionaireUrl = `https://qa4-tms.turito.com/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
   // alert(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
+  // Dom methods
+  //parent
   const modalEl = document.createElement("div");
-  modalEl.innerHTML = `
-  <div class="questionaire-modal__content">
-    <iframe class="questionaire-modal__iframe" name="${randomUniqueIdentifier}" src="${questionaireUrl}"></iframe>
-  </div>
-`;
+  // child
+  const modalChild = document.createElement("div");
+  modalChild.className = "questionaire-modal__content";
+  // close button
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "Close x";
+  closeButton.id = "close-iframe-tms";
+  closeButton.addEventListener("click", () => handleQuestionaireCancel());
+  closeButton.style = `position: absolute;
+    z-index: 9999;
+    color: white;
+    right: 10px;
+    background-color: #f14a5e;
+    padding: 3px 6px;
+    border-radius: 5px;`;
+  //iframe
+  const iframeEl = document.createElement("iframe");
+  iframeEl.className = "questionaire-modal__iframe";
+  iframeEl.name = randomUniqueIdentifier;
+  iframeEl.src = questionaireUrl;
+  //   modalEl.innerHTML = `
+  //     <iframe class="questionaire-modal__iframe" name="${randomUniqueIdentifier}" src="${}"></iframe>
+  // `;
+  modalChild.appendChild(closeButton);
+  modalChild.appendChild(iframeEl);
+  modalEl.appendChild(modalChild);
   modalEl.className = "questionaire-modal";
   modalEl.id = "questionaire-modal";
   document.body.appendChild(modalEl);
