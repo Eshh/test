@@ -159,7 +159,7 @@ const showQuestionaire = (isLeaving) => {
     border-radius: 5px;`;
   //iframe
   const iframeEl = document.createElement("iframe");
-  iframeEl.className = "questionaire - modal__iframe";
+  iframeEl.className = "questionaire-modal__iframe";
   iframeEl.name = randomUniqueIdentifier;
   iframeEl.src = questionaireUrl;
   //   modalEl.innerHTML = `
