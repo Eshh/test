@@ -150,14 +150,17 @@ const showQuestionaire = (isLeaving) => {
   closeButton.textContent = "Close x";
   closeButton.id = "close-iframe-tms";
   closeButton.addEventListener("click", () => handleQuestionaireCancel());
-  closeButton.style = `position: relative;
+  closeButton.style = `
+     position: relative;
     z-index: 9999;
     color: white;
-    top:2%;
-    left:90%;
-    background-color: #f14a5e;
-    padding: 3px 6px;
-    border-radius: 5px;`;
+    right: 10px;
+    background-color: rgb(241, 74, 94);
+    padding: 3px 8px;
+    border-radius: 5px;
+    left: 95%;
+    top: 1%;
+}`;
   //iframe
   const iframeEl = document.createElement("iframe");
   iframeEl.className = "questionaire-modal__iframe";
