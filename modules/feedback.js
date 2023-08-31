@@ -150,10 +150,11 @@ const showQuestionaire = (isLeaving) => {
   closeButton.textContent = "Close x";
   closeButton.id = "close-iframe-tms";
   closeButton.addEventListener("click", () => handleQuestionaireCancel());
-  closeButton.style = `position: absolute;
+  closeButton.style = `position: relative;
     z-index: 9999;
     color: white;
-    right: 10px;
+    top:2%;
+    left:90%;
     background-color: #f14a5e;
     padding: 3px 6px;
     border-radius: 5px;`;
