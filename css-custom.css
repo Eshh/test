@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap');
+
+body,p,span, input, ul, li, label, button, h1,h2,h3,h4,h5,h6{
+	font-family: 'Poppins' !important;
+}
+
+/* ---- Preloading ---- */
+.loading-component{
+	background-color: #2d2c2c !important;
+}
+
+.dark .el-loading-spinner .el-loading-text, .dark .el-loading-spinner .path{
+	color: #ffffff !important;
+}
+/* ---- Preloading ---- */
+
+
+/* ---- Header and footer----- */
+.dark .filter-blur-bg{
+	background: #2d2c2c !important;
+}
+.header-pc-component, .dark .filter-blur-bg{
+	background-color: #2d2c2c !important;
+}
+.header__button--start{
+	margin-left: 20px !important;
+}
+.header-pc-component .course-time{padding: 0 10px !important;}
+/* .header__list li:nth-child(5){
+	display: none !important;
+} */
+/* hide tools */
+.tool-tool-box{
+	display: none !important;
+}
+.quick-im-component .quick-im-component-tools .quick-im-component-tools-input{
+	background-color: #000000 !important;
+}
+.quick-im-component .quick-im-component-tools .quick-im-component-tools-input .quick-im-component-meme{
+	max-width: 30px !important;
+}
+.header-component-default .header-component .button--secondary.active{
+	background-color: #3b3b3b !important;
+}
+.ui-box .ui-box-header .ui-box-header-close, .ui-box .ui-box-header .ui-box-header-close:active{
+	background-color: transparent !important;
+}
+.ui-box .ui-box-content, .ui-box .ui-box-content[data-v-4eab5412]{
+	background: #3b3b3b !important;
+}
+.el-popover.header-component-popover, .ui-box{
+	background-color: #3b3b3b !important;
+}
+.quick-im-component .quick-im-component-tools .quick-im-component-tools-input .quick-im-component-input{
+	width: inherit !important; margin-left: 0 !important;
+}
+
+.tic-board_laser-item-title{color : #000000 !important}
+
+.header-pc-component .header__list li{
+	padding: 0 !important;
+	width: auto !important;
+}
+.header-component-default .header-component .button--secondary{
+	width: auto !important; height: auto !important;
+}
+.header-component-default .header-component .header__i.i--menu{
+	margin: 0 6px !important;
+	padding: 0 20px !important;
+}
+.header__i.i--menu.ic_nav_tool{
+	display: none !important;
+}
+.more-popover .header-more-box li{ width :auto !important;}
+.more-popover .header-more-box .button--secondary{padding:0 !important;}
+.more-popover .header-more-box .header__i.i--menu{padding: 0 26px !important;}
+.header-mobile-component{ background:#2d2c2c !important;}
+
+.el-popover.board-tool__back-popper .board-tool__list-popper ul li.board-tool__li-active{background: #f14a5e !important;}
+.el-popover.board-tool__back-popper .board-tool__board-drop {background: #3d3d3d !important;}
+
+.board-tool__list.active{background-image:url("https://a.storyblok.com/f/128066/x/3f2e30ab1b/boardtoolsvg.svg") !important;}
+/* ---- Header and footer end----- */
+
+/* To hide maximize icons  */
+.video-wrap-component .video-up .el-button{ display:none !important}
+.ppt-tool__board-full{ display:none !important}
+
+/* for message floating */
+.float-im-component-default{height: calc(100dvh - 100px) !important}
+
+.member-list-component .member-list__table-wrap .member-list__table .member-list__thead .member-list__th {
+	font-size: 10px !important;
+}
+
+.introduction-discuss-component.client-black{background: #3b3b3b !important}
+
+
+.board-footer-mobile__tool-box-wrap li.actived {
+	background-color: #f14a5e !important;
+}
+
+.small-screen .switch-orientation{
+	display: none !important;
+	}
+
+	.msg-box-component .el-dialog .el-dialog__body .option .el-checkbox__label{ color: #ffffff !important}
+	.msg-box-component .el-dialog .el-dialog__body .option .el-checkbox__input.is-checked .el-checkbox__inner{
+		background-color: #f14a5e !important;
+		background: #f14a5e !important;
+		border-color: #f14a5e !important;
+	}
+
+
+
+/* ----- Board ----- */
+.board-parent, .board-parent .board-component, .video-wrap-component .video-list,
+.video-wrap-component .video-list:hover{
+	background-color: #1A1A1A !important;
+}
+.video-wrap-component .video-list:hover{
+	background-image: none !important;
+}
+.video-component .video__content .video__status i.video-role.teacher, .video-wrap-component .video-up .el-button:hover{
+	background: #f14a5e !important;
+}
+.dark .el-pagination.is-background .el-pager li:not(.disabled).active,
+.member-list-component .member-list__menu .member-list__tabs span.member-list__tab.active,
+.member-list-component .member-list__table-wrap .member-list__table .member-list__user-name-wrap .role-icon.teacher-icon,
+.board-tools-component-menu ul li.active,
+.el-popover li.active{
+	background: #f14a5e !important;
+}
+.el-popover.submenu-popover { padding : 0 !important}
+.el-popover.submenu-popover .header-more-box .header-menu-li{ padding : 0 16px}
+.el-popover.el-popper.back-popper .board-drop{
+	background: #3b3b3b !important;
+}
+
+.el-popover.submenu-popover .header-more-box .header-menu-li .layout-ic-top.active {
+	background-image: url('https://a.storyblok.com/f/128066/x/4d5da4842a/top.svg') !important;
+}
+.el-popover.submenu-popover .header-more-box .header-menu-li .layout-ic-right.active {
+	background-image: url('https://a.storyblok.com/f/128066/x/0f2bb2643c/right.svg') !important;
+}
+.el-popover.submenu-popover .header-more-box .header-menu-li .layout-ic-left.active {
+	background-image: url('https://a.storyblok.com/f/128066/x/bf4e2ea0da/left.svg') !important;
+}
+.el-popover.submenu-popover .header-more-box .header-menu-li .layout-ic-double.active {
+	background-image: url('https://a.storyblok.com/f/128066/x/0f873a6da3/double.svg') !important;
+}
+.el-popover.submenu-popover .header-more-box .header-menu-li .layout-ic-three.active {
+	background-image: url('https://a.storyblok.com/f/128066/x/392299cca5/tree.svg') !important;
+}
+
+.member-list-component .member-list__table-wrap .member-list__table .member-list__tbody .member-list__tr .member-list__td .item-wrapper {
+	background: transparent !important;
+}
+.more-popover .header-more-box .button--secondary.active{
+	background: #f14a5e !important;
+}
+.setting-component .setting-video-model .el-switch.video-model-switch.is-checked .el-switch__core{
+	background: #f14a5e !important;
+	border-color: #f14a5e !important;
+}
+.document-component .course-main-tab .course-tab-item_active {
+	color: #f14a5e !important;
+}
+.quick-im-component-msg .quick-im-component-msg-body .role-icon.teacher-icon,
+.role-icon.teacher-icon{
+	background: #f14a5e !important;
+}
+.setting-component .setting-video-model .el-switch.video-model-switch .el-switch__core:after{
+	background-color: #8d8d8d !important;
+}
+.im-component .im-component-footer .image:hover{
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6Ii8+PHBhdGggc3Ryb2tlPSIjRkZGIiBzdHJva2Utd2lkdGg9IjMiIGQ9Ik01LjUgOC41aDMwdjI0aC0zMHoiLz48cGF0aCBkPSJNMjguMSAxOGw4LjkgOC42NjdWMzRINC41MDdsOC43NTEtMTEuMTEgNS4xMTUgMy43NzdMMjguMSAxOHptLTE0LjYtNWEyLjUgMi41IDAgMTEwIDUgMi41IDIuNSAwIDAxMC01eiIgZmlsbD0iI0ZGRiIvPjwvZz48L3N2Zz4=") !important;
+}
+/* ----- Board end ----- */
+
+
+/* Toast Message */
+.dark .el-message.el-message--warning{
+	background-color: #3b3b3b !important;
+	border-color: #3b3b3b !important;
+}
+.dark .el-message.el-message--warning .el-message__content{
+	color: #ffffff !important;
+}
+.class-reminder-component .header__class-tips .tips-class-text{
+	color: #ffffff !important;
+	white-space: nowrap !important;
+}
+.class-reminder-component .header__class-tips .tips-class-number{
+	padding: 0 5px !important;
+}
+.class-reminder-component .header__class-tips{
+	background-color: #3b3b3b !important;
+	display: flex !important;
+}
+.dark .el-message.el-message--warning i::before{
+	content: url("https://d2ivesio5kogrp.cloudfront.net/static/yuppedu/images/feather-alert-circle-white.svg") !important;
+}
+.class-reminder-component .header__class-tips .tips-class-icon {
+	background-image: url("https://d2ivesio5kogrp.cloudfront.net/static/yuppedu/images/feather-alert-circle-white.svg");
+}
+.quick-im-component-msg-user-name{
+	color: #7e7e7e !important;
+}
+/* .board-tools-component-menu ul li:nth-child(5){
+	display: none !important;
+} */
+.video-component .video_close .icon{
+	background-image: url("https://a.storyblok.com/f/128066/160x90/a05cc5f4cf/studentthumbnail.png") !important;
+}
+
+.teacher-interact-cover.en .background{
+	background-image: url("https://a.storyblok.com/f/128066/x/318a811763/teacheroffline.svg") !important;
+}
+.im-component .im-component-footer .image:hover{
+
+}
+
+/* Toast Message end*/
+
+
+.setting-language, #tab-general {
+	display: none !important;
+}
+/* .tx_board_canvas_wrap canvas { background-color: #fff !important;}
+.tiw-sketch__canvas{ background-color: #fff !important;} */
+.tic_board_bg{background-color: #fff !important;background-color: rgba(225, 225, 225, 1) !important;}
+.header__button--start.el-button--warning {background: #f14a5e !important; border-color: #f14a5e !important;}
+
+
+/*----Class info Icon----*/
+/* .class-info-sub-component .icon-wrapper{
+	display: none !important;
+} */
+
+
+/*----Device detection----*/
+.device-detect-wrapper .detect-enter .section{
+	font-size: 14px !important;
+	color: #c8c6c4 !important;
+}
+.dark .el-button--primary, .dark .el-button--primary:hover, .dark .el-button--primary:focus,
+.device-detect-wrapper .el-checkbox__input.is-checked .el-checkbox__inner, .device-detect-wrapper .el-checkbox__input.is-indeterminate .el-checkbox__inner,
+.el-switch.is-checked .el-switch__core{
+	background-color: #f14a5e !important;
+    border-color: #f14a5e !important;
+}
+
+.device-detect-wrapper .el-checkbox__input.is-checked+.el-checkbox__label{
+	color: #f14a5e !important;
+}
+
+.dark .el-slider__bar, .device-detect-wrapper .detect-enter .volume .capacity .item.active,
+.im-component .im-component-footer .im-component-bottom-tools .im-component-send{
+	background-color: #f14a5e !important;
+}
+.im-component-msg .im-component-msg-header .role-icon.teacher-icon{
+	background: #f14a5e !important;
+}
+
+.dark .el-select-dropdown__item.selected{
+	color: #ffffff !important;
+}
+.device-detect-wrapper .detect-enter .enter-section .enter{
+	font-size: 16px !important;
+	height: 42px !important;
+	line-height: inherit !important;
+}
+/*----Device detection end----*/
+
+
+/* ----- Modal Popup ----- */
+
+.dark .el-tabs__item:hover{
+	color: #f14a5e !important;
+}
+.dark .el-dialog{
+	background-color: #2d2c2c !important;
+}
+.el-dialog .el-dialog__body .message{
+	color: #ffffff !important;
+}
+.msg-box-component .el-dialog .el-dialog__header .el-dialog__title{
+	color: #c8c6c4 !important;
+}
+.header-component-default .header-component:not(.mobile) .button--secondary {
+	padding: 4px 6px !important;
+}
+
+.header-component-default .header-component:not(.mobile) .button--secondary.active, .header-component-default .header-component:not(.mobile) .button--secondary:hover {
+    background: linear-gradient(325.23deg,rgb(241, 74, 94,.5) -56.48%,rgba(255, 0, 25, 0) 86.49%),rgba(25,27,34,.7);
+	border:1px solid #f14a5e;
+}
+.el-dialog__footer .el-button,
+.el-dialog__footer .el-button:hover,
+.el-dialog__footer .el-button:focus{
+	background: #292828 !important;
+    border-color: #fff !important;
+	color: #ffffff !important;
+}
+.setting-detect .volume-test .volume-scrollbar .el-button,
+.dark .el-checkbox__input.is-checked+.el-checkbox__label{
+	color: #f14a5e !important;
+}
+
+.msg-box-component .el-dialog .el-dialog__footer .el-button--primary,
+.dark .el-checkbox__input.is-checked .el-checkbox__inner {
+	background-color: #f14a5e !important;
+    border-color: #f14a5e !important;
+}
+.header-pc-component .header__list {
+	gap: 10px;
+}
+
+.document-component .course-main-tab .course-tab-item_active:after{
+	background: #f14a5e !important;
+}
+.el-dialog__close:hover,
+.document-component .course-ware-header .el-button{
+	color: #ffffff !important;
+}
+.dark .component-header .header-close,
+.dark .component-header .header-close:active{
+	background-color: transparent !important;
+}
+/* ----- Modal Popup end----- */
+
+.small-screen .switch-orientation{
+    display: none;
+}
+
+/* ----- Message ----- */
+.im-component{
+	background-color: #3b3b3b !important;
+}
+/* ----- Message end----- */
+
+/* footer from absolute to fixed */
+.footer-component-default{ position: fixed !important; left: unset !important; top: unset !important; bottom: 10px !important;}
+
+/* hiding virtual background */
+/* .setting-beauty{display: none !important;} */
+
+/* virtual background */
+.virtual-background-item:hover, .virtual-background-item.active,
+.document-component .course-con-list:hover{
+    border-color: #f14a5e !important;
+}
+/* feedback css */
+.questionaire-modal {position: fixed;z-index: 2000;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgba(0, 0, 0, 0.4);
+	display: flex;justify-content: center;align-items: center;
+}
+
+.questionaire-modal__content {position: relative; background-color: #fefefe;border: 1px solid #888;width: 640px;height: 480px;}
+
+.questionaire-modal__iframe {
+  width: 100%; height: 100%; border: none;
+}
+
+@media screen and (max-width: 700px) {
+  .questionaire-modal__content {
+    width: 90%; height: 90%;
+  }
+}
