@@ -352,7 +352,7 @@ body,p,span, input, ul, li, label, button, h1,h2,h3,h4,h5,h6{
     border-color: #f14a5e !important;
 }
 /* feedback css */
-.questionaire-modal {position: fixed;z-index: 2000;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgba(0, 0, 0, 0.4);
+.questionaire-modal {position: fixed;z-index: 330;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgba(0, 0, 0, 0.4);
 	display: flex;justify-content: center;align-items: center;
 }
 
