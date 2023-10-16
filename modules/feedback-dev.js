@@ -152,7 +152,7 @@ const showQuestionaire = (isLeaving) => {
   closeButton.addEventListener("click", () => handleQuestionaireCancel());
   closeButton.style = `
      position: relative;
-    z-index: 330;
+    z-index: 9999;
     color: white;
     right: 10px;
     background-color: rgb(241, 74, 94);
