@@ -147,16 +147,20 @@ const showQuestionaire = (isLeaving) => {
   modalChild.className = "questionaire-modal__content";
   // close button
   const closeButton = document.createElement("button");
-  closeButton.textContent = "Close x";
+  closeButton.textContent = "X";
   closeButton.id = "close-iframe-tms";
   closeButton.addEventListener("click", () => handleQuestionaireCancel());
-  closeButton.style = `position: absolute;
-    z-index: 250000;
+  closeButton.style = `
+     position: relative;
+    z-index: 9999;
     color: white;
     right: 10px;
-    background-color: #f14a5e;
-    padding: 3px 6px;
-    border-radius: 5px;`;
+    background-color: rgb(241, 74, 94);
+    padding: 3px 8px;
+    border-radius: 5px;
+    left: 95%;
+    top: 1%;
+}`;
   //iframe
   const iframeEl = document.createElement("iframe");
   iframeEl.className = "questionaire-modal__iframe";
@@ -233,7 +237,6 @@ const handleQuestionaireSubmit = () => {
 
 // callback if questionaire has been cancelled
 const handleQuestionaireCancel = () => {
-  console.log("mehreen hide", isLeavingClass, isEndingClass);
   hideQuestionaire();
   // continue leaving class
   if (isLeavingClass) {
