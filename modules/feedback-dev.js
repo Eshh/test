@@ -15,11 +15,12 @@ let customParam = new URLSearchParams(
   window.location.href || document.location.href
 );
 let feedbackSetting = customParam.get("feedbackSetting").trim();
+let isHardDisabled = customParam.get("isHardDisabled");
 
 // wait until joined class
 TCIC.SDK.instance.promiseState(TCIC.TMainState.Joined_Class, true).then(() => {
   // check if current user is teacher
-  if (TCIC.SDK.instance.isTeacher() && feedbackSetting != "disabled") {
+  if (TCIC.SDK.instance.isTeacher() && feedbackSetting != "disabled" && !isHardDisabled) {
     onTeacherJoinedClass();
   }
 });
