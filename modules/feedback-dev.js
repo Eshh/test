@@ -19,6 +19,7 @@ let isHardDisabled = 'false';
 if(customParam.get("isHardDisabled")){
   isHardDisabled = customParam.get("isHardDisabled").trim();
 }
+console.log(isHardDisabled, typeof isHardDisabled,'Oct 25')
 
 // wait until joined class
 TCIC.SDK.instance.promiseState(TCIC.TMainState.Joined_Class, true).then(() => {
