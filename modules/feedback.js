@@ -15,11 +15,15 @@ let customParam = new URLSearchParams(
   window.location.href || document.location.href
 );
 let feedbackSetting = customParam.get("feedbackSetting").trim();
+let isHardDisabled = 'false';
+if(customParam.get("isHardDisabled")){
+  isHardDisabled = customParam.get("isHardDisabled").trim();
+}
 
 // wait until joined class
 TCIC.SDK.instance.promiseState(TCIC.TMainState.Joined_Class, true).then(() => {
   // check if current user is teacher
-  if (TCIC.SDK.instance.isTeacher() && feedbackSetting != "disabled") {
+  if (TCIC.SDK.instance.isTeacher() && feedbackSetting != "disabled"  && isHardDisabled == 'false') {
     onTeacherJoinedClass();
   }
 });
@@ -136,7 +140,7 @@ const showQuestionaire = (isLeaving) => {
   let contentIdTms = customParam.get("contentId");
   // window.location.href.split("session=")[1].split("&")[0] ||
   // window.location.href.split("session=")[1];
-  const questionaireUrl = `https://tms.turito.com/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
+  const questionaireUrl = `https://qa4-tms.turito.com/give/class/feedback/${roomId}/${contentIdTms}/${sessionIdTms}/${boxIdTms}`;
   // alert(questionaireUrl);
   const randomUniqueIdentifier = Math.floor(Math.random() * 100);
   // Dom methods
